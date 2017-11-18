@@ -145,6 +145,8 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    uglifier (3.0.0)
+      execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
 
@@ -161,3 +163,4 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 5.0)
   spring
+  uglifier

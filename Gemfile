@@ -6,7 +6,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'pg'
-
+gem 'uglifier'
 group :development, :test do
   gem 'pry'
 
