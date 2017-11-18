@@ -6,7 +6,12 @@ class Location < ActiveRecord::Base
 
   def shared_locations_with_friends(friend_ids)
     shared_locations.destroy_all
+
     user.friends.where(id: friend_ids).map do |friend|
+      shared_locations.create(friend_id: friend.id, user_id: user.id)
+    end
+
+    user.inverse_friends.where(id: friend_ids).map do |friend|
       shared_locations.create(friend_id: friend.id, user_id: user.id)
     end
   end
