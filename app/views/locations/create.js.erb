@@ -1,0 +1,2 @@
+$(".map-container").html("<%= j render 'users/map' %>");
+OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json) %>"));

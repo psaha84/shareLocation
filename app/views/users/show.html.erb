@@ -6,7 +6,7 @@
     <% end %>
   </div>
   <div class="row border-bottom map-container">
-    <div id="map" class="map col-md-8"></div>
+    <%= render "map" %>
   </div>
 
   <div class="row">
@@ -16,7 +16,7 @@
         <tbody>
           <% @user.mutual_friends.each do |friend| %>
           <tr>
-            <td><%= link_to friend.email, user_path(friend) %></td>
+            <td><%= link_to friend.email, user_path(friend.username) %></td>
             <% if current_user == @user %>
               <td><%= link_to "Remove", friendships_path(:id => friend), :method => "DELETE", class: "pull-right btn btn-danger" %>
             <% end %>
@@ -55,3 +55,6 @@
     </div>
   <% end %>
 </div>
+<% content_for(:javascript) do %>
+  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json) %>"));
+<% end %>

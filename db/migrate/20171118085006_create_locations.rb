@@ -4,6 +4,7 @@ class CreateLocations < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.string :latitude, null: false
       t.string :longitude, null: false
+      t.boolean :public, null: false, default: false
 
       t.timestamps null: false
     end

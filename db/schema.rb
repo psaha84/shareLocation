@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 20171118085006) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "latitude",   null: false
-    t.string   "longitude",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                    null: false
+    t.string   "latitude",                   null: false
+    t.string   "longitude",                  null: false
+    t.boolean  "public",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "users", force: :cascade do |t|

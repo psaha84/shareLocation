@@ -9,5 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:id])
+    @locations = current_user == @user ? @user.locations : @user.locations.shared
   end
 end
