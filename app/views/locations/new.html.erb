@@ -1,0 +1,21 @@
+<%= form_for Location.new, url: locations_path, html: { class: "form-horizontal" } do |f| %>
+  <%= f.hidden_field :id %>
+  <div class="form-group">
+    <%= f.label :latitude, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :latitude, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :longitude, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :longitude, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-6">
+      <%= f.submit "Save", class: "btn btn-default" %>
+    </div>
+  </div>
+<% end %>

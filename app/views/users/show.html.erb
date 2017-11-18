@@ -5,6 +5,10 @@
     <%= link_to "Add Friend", friendships_path(friend_id: @user), method: "POST", class: "pull-right btn btn-primary" %>
     <% end %>
   </div>
+  <div class="row border-bottom map-container">
+    <div id="map" class="map col-md-8"></div>
+  </div>
+
   <div class="row">
     <h3>Friends</h3>
     <div class="column">

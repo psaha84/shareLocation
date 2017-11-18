@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>ShareLocation</title>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.5.0/css/ol.css" type="text/css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <script src="https://openlayers.org/en/v4.5.0/build/ol.js" type="text/javascript"></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
@@ -10,6 +12,9 @@
   <%= render "layouts/navbar" %>
   <div class="container">
     <%= yield %>
+    <%= javascript_tag do %>
+      <%= yield :javascript %>
+    <% end %>
   </div>
 </body>
 </html>
