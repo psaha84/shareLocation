@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <h3>Users</h3>
+    <div class="column">
+      <table class="table">
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to user.email, user %></td>
+              <td>
+                <% if current_user.has_friendship?(user) %>
+                  <%= link_to "Remove Friendship", friendships_path(id: user), method: "DELETE", class: "btn btn-primary pull-right" %>
+                <% else %>
+                  <%= link_to "Send Friend Request", friendships_path(friend_id: user), method: "POST", class: "btn btn-primary pull-right" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

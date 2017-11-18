@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118041432) do
+ActiveRecord::Schema.define(version: 20171118050549) do
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,                       null: false
+    t.integer  "friend_id",  limit: 4,                       null: false
+    t.string   "status",     limit: 255, default: "pending", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "friendships", ["friend_id"], name: "fk_rails_d78dc9c7fd", using: :btree
+  add_index "friendships", ["user_id"], name: "fk_rails_e3733b59b7", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -31,4 +42,6 @@ ActiveRecord::Schema.define(version: 20171118041432) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
 end

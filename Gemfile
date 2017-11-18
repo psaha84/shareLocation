@@ -5,6 +5,7 @@ gem 'mysql2', '~> 0.3.20'
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
 gem 'devise'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
   gem 'pry'
