@@ -20,6 +20,13 @@
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <%= label_tag :friend, "Share this location with friends", class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= collection_select nil, :friend_ids, @user.mutual_friends, :id, :username, { include_blank: 'Select' }, { multiple: true, class: "form-control" } %>
+    </div>
+  </div>
+
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-6">

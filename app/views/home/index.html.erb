@@ -1,4 +1,4 @@
 <div id="map" class="map"></div>
 <% content_for(:javascript) do %>
-  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json) %>"));
+  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json(include: :user)) %>"), null, null);
 <% end %>

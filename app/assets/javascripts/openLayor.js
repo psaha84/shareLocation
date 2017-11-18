@@ -1,9 +1,13 @@
 OpenLayer = {
   locations: null,
   vectorSource: null,
+  currentUserId: null,
+  userId: null,
 
-  init: function(locations){
+  init: function(locations, currentUserId, userId){
     OpenLayer.locations = locations;
+    OpenLayer.currentUserId = currentUserId;
+    OpenLayer.userId = userId;
     OpenLayer.vectorSource = new ol.source.Vector();
     var vectorLayer = new ol.layer.Vector({
       source: this.vectorSource,
@@ -44,16 +48,40 @@ OpenLayer = {
   },
 
   markerStyle: function(feature) {
-    var markerColor = feature.P.public ? 'green' : 'red';
+    var markerColor, markerText;
+    if(feature.P.public) {
+      markerColor = 'green';
+      markerText = "Public";
+    } else {
+      if (parseInt(feature.P.user_id, 10) !== parseInt(OpenLayer.currentUserId, 10)){
+        markerText = "Shared by " + feature.P.user.username;
+        markerColor = 'orange';
+      } else if (parseInt(OpenLayer.userId, 10) === parseInt(OpenLayer.currentUserId, 10)) {
+        markerText = "Private";
+        markerColor = 'red';
+      } else {
+        markerText = "Shared by me";
+        markerColor = 'red';
+      }
+    }
+
     var style = new ol.style.Style({
       image: new ol.style.Circle({
-        radius: 6,
+        radius: 10,
+        text: markerText,
         stroke: new ol.style.Stroke({
           color: 'white',
           width: 2
         }),
         fill: new ol.style.Fill({
           color: markerColor
+        })
+      }),
+      text: new ol.style.Text({
+        text: markerText,
+        offsetY: 0,
+        fill: new ol.style.Fill({
+          color: '#000'
         })
       })
     });

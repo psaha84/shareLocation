@@ -16,7 +16,8 @@
         <tbody>
           <% @user.mutual_friends.each do |friend| %>
           <tr>
-            <td><%= link_to friend.email, user_path(friend.username) %></td>
+            <td><%= link_to friend.username, user_path(friend.username) %></td>
+            <td><%= friend.email %></td>
             <% if current_user == @user %>
               <td><%= link_to "Remove", friendships_path(:id => friend), :method => "DELETE", class: "pull-right btn btn-danger" %>
             <% end %>
@@ -56,5 +57,5 @@
   <% end %>
 </div>
 <% content_for(:javascript) do %>
-  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json) %>"));
+  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json(include: :user)) %>"), "<%= current_user.id %>", "<%= @user.id %>");
 <% end %>

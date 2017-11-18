@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
     location = current_user.locations.build(location_params)
 
     if location.save
+      location.shared_locations_with_friends(params[:friend_ids]) if params[:friend_ids]
       @locations = current_user.locations
       render layout: false
     end

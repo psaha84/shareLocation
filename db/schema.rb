@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118085006) do
+ActiveRecord::Schema.define(version: 20171118105808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20171118085006) do
     t.boolean  "public",     default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "shared_locations", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "friend_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,4 +62,7 @@ ActiveRecord::Schema.define(version: 20171118085006) do
 
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "shared_locations", "locations"
+  add_foreign_key "shared_locations", "users"
+  add_foreign_key "shared_locations", "users", column: "friend_id"
 end
