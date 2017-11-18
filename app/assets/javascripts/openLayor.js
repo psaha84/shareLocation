@@ -32,6 +32,33 @@ OpenLayer = {
     });
 
     OpenLayer.drawMarker();
+    var select = new ol.interaction.Select({
+      layers: [vectorLayer]
+    });
+
+    var selectedFeatures = select.getFeatures();
+    selectedFeatures.on('add', function(event) {
+      var feature = event.element.P;
+      console.log(feature)
+      $("#location-friend-ids").val(feature.friend_ids);
+      $("#location_id").val(feature.id);
+      $("#location_latitude").val(feature.latitude);
+      $("#location_longitude").val(feature.longitude);
+    });
+
+    map.addInteraction(select);
+    map.on("click", function(evt){
+      $("#location_id").val("")
+      var coord = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+      var stringifyFunc = ol.coordinate.createStringXY(2);
+      var longLat = stringifyFunc(coord).split(", ");
+      setTimeout(function(){
+        if(!$("#location_id").val()) {
+          $("#location_latitude").val(longLat[1]);
+          $("#location_longitude").val(longLat[0]);
+        }
+      }, 500);
+    });
 
   },
 

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       @locations = @user.locations.public_to_all
     end
 
-    @locations =  @locations | @user.shared_locations(current_user)
+    @locations = @locations | @user.shared_locations(current_user)
+    @locations = @locations.to_json(include: :user)
   end
 end

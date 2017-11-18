@@ -3,11 +3,12 @@ class LocationsController < ApplicationController
 
   def create
     @user = current_user
-    location = current_user.locations.build(location_params)
+    location = @user.locations.find(params[:location].delete(:id)) if params[:location][:id].present?
+    location ||= @user.locations.build
 
-    if location.save
+    if location.update_attributes(location_params)
       location.shared_locations_with_friends(params[:friend_ids]) if params[:friend_ids]
-      @locations = current_user.locations
+      @locations = current_user.locations.to_json(include: :user)
       render layout: false
     end
   end

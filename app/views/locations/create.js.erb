@@ -1,2 +1,2 @@
 $(".map-container").html("<%= j render 'users/map' %>");
-OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json(include: :user)) %>"), "<%= current_user.id %>", "<%= @user.id %>");
+OpenLayer.init(JSON.parse("<%= j raw(@locations) %>"), "<%= current_user.id %>", "<%= @user.id %>");

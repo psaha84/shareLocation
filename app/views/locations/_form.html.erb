@@ -1,4 +1,6 @@
 <%= form_for Location.new, url: locations_path, method: "POST", remote: true, html: { class: "form-horizontal" } do |f| %>
+  <%= f.hidden_field :id %>
+
   <div class="form-group">
     <%= f.label :latitude, class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
@@ -23,7 +25,7 @@
   <div class="form-group">
     <%= label_tag :friend, "Share this location with friends", class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
-      <%= collection_select nil, :friend_ids, @user.mutual_friends, :id, :username, { include_blank: 'Select' }, { multiple: true, class: "form-control" } %>
+      <%= collection_select nil, :friend_ids, @user.mutual_friends, :id, :username, { include_blank: 'Select' }, { id: "location-friend-ids", multiple: true, class: "form-control" } %>
     </div>
   </div>
 

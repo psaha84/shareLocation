@@ -57,5 +57,5 @@
   <% end %>
 </div>
 <% content_for(:javascript) do %>
-  OpenLayer.init(JSON.parse("<%= j raw(@locations.to_json(include: :user)) %>"), "<%= current_user.id %>", "<%= @user.id %>");
+  OpenLayer.init(JSON.parse("<%= j raw(@locations) %>"), "<%= current_user.id %>", "<%= @user.id %>");
 <% end %>
