@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :pending_friends, -> { where(friendships: { status: "pending" }) }, through: :friendships, source: :friend
   has_many :requested_friends, -> { where(friendships: { status: "pending" }) }, through: :inverse_friendships, source: :user
 
+  def to_param
+    username
+  end
 
   def mutual_friends
     friends | inverse_friends

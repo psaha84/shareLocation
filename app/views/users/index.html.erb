@@ -6,7 +6,8 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= link_to user.email, user %></td>
+              <td><%= link_to user.username, user_path(user.username) %></td>
+              <td><%= user.email %></td>
               <td>
                 <% if current_user.has_friendship?(user) %>
                   <%= link_to "Remove Friendship", friendships_path(id: user), method: "DELETE", class: "btn btn-primary pull-right" %>
