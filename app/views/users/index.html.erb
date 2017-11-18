@@ -10,7 +10,12 @@
               <td><%= user.email %></td>
               <td>
                 <% if current_user.has_friendship?(user) %>
-                  <%= link_to "Remove Friendship", friendships_path(id: user), method: "DELETE", class: "btn btn-primary pull-right" %>
+                  <%= link_to "Remove Friendship", friendships_path(id: user), method: "DELETE", class: "btn btn-default pull-right" %>
+                <% elsif @requested_friend_ids.include?(user.id) %>
+                  <%= link_to "Accept", friendships_path(id: user), method: "PUT", class: "btn btn-success pull-right" %>
+                  <%= link_to "Reject", friendships_path(id: user), method: "DELETE", class: "btn btn-danger pull-right" %>
+                <% elsif @pending_friend_ids.include?(user.id) %>
+                  <span class="btn btn-primary pull-right" disabled="disabled">Request Sent</span>
                 <% else %>
                   <%= link_to "Send Friend Request", friendships_path(friend_id: user), method: "POST", class: "btn btn-primary pull-right" %>
                 <% end %>

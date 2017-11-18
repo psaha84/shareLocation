@@ -10,4 +10,19 @@ class FriendshipsController < ApplicationController
       redirect_to users_path, error: "Unable to add friend."
     end
   end
+
+  def update
+    friendship = current_user.inverse_friendships.find_by(user_id: params[:id])
+    if friendship.accept
+      redirect_to request.referrer, notice: "Friendship accepted"
+    else
+      redirect_to request.referrer, notice: "Some thing went wrong"
+    end
+  end
+
+  def destroy
+    friendship = Friendship.where(user_id: [current_user, params[:id]]).where(friend_id: [current_user, params[:id]]).last
+    friendship.destroy
+    redirect_to request.referrer, notice: "Removed friendship."
+  end
 end
