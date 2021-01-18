@@ -4,7 +4,7 @@ gem 'rails', '4.2.3'
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
 gem 'devise'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'pg'
 gem 'uglifier'
 group :development, :test do
